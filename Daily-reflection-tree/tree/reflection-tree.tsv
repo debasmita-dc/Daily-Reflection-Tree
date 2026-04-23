@@ -1,0 +1,26 @@
+id	parentId	type	text	options	target	signal
+START	null	start	Good evening. Let’s take a few minutes to reflect on your day.			
+A1_OPEN	START	question	How would you describe your day overall?	Productive|Tough|Mixed|Frustrating		
+A1_D1	A1_OPEN	decision		answer=Productive|Mixed:A1_Q_HIGH;answer=Tough|Frustrating:A1_Q_LOW		
+A1_Q_HIGH	A1_D1	question	When something went well today, what mattered most?	I prepared|I adapted|Team helped|Luck		axis1:internal
+A1_Q_LOW	A1_D1	question	When things didn’t go as planned, what was your first reaction?	Figure what I control|Wait for help|Push alone|Feel stuck		axis1:external
+A1_R_INT	A1_Q_HIGH	reflection	You noticed your role in shaping outcomes today. That’s internal locus — recognizing agency even when conditions aren’t perfect.			axis1:internal
+A1_R_EXT	A1_Q_LOW	reflection	A difficult day often highlights constraints. Still, even small choices matter. Awareness is the first step toward agency.			axis1:external
+BRIDGE_1_2A	A1_R_INT	bridge	Now let’s shift from how you handled the day to what you contributed.		A2_OPEN	
+BRIDGE_1_2B	A1_R_EXT	bridge	Now let’s shift from how you handled the day to what you contributed.		A2_OPEN	
+A2_OPEN	null	question	Which moment stands out most today?	I helped someone|I went beyond my role|I needed support|I felt unrecognized		
+A2_D1	A2_OPEN	decision		answer=I helped someone|I went beyond my role:A2_Q_GIVE;answer=I needed support|I felt unrecognized:A2_Q_EXPECT		
+A2_Q_GIVE	A2_D1	question	How did that contribution show up?	Time|Guidance|Extra effort|Listening		axis2:contribution
+A2_Q_EXPECT	A2_D1	question	What expectation felt unmet?	Recognition|Resources|Support|Clarity		axis2:entitlement
+A2_R_CONTRIB	A2_Q_GIVE	reflection	You focused on giving rather than measuring return. Contribution often compounds quietly over time.			axis2:contribution
+A2_R_ENT	A2_Q_EXPECT	reflection	Noticing unmet expectations is human. Reflection helps separate what you controlled from what you expected.			axis2:entitlement
+BRIDGE_2_3A	A2_R_CONTRIB	bridge	Let’s widen the lens and look beyond yourself.		A3_OPEN	
+BRIDGE_2_3B	A2_R_ENT	bridge	Let’s widen the lens and look beyond yourself.		A3_OPEN	
+A3_OPEN	null	question	When you think about today’s challenges, who comes to mind first?	Just me|My team|A colleague|Customer/user		
+A3_D1	A3_OPEN	decision		answer=Just me:A3_SELF;answer=My team|A colleague|Customer/user:A3_OTHER		
+A3_SELF	A3_D1	question	What was your main concern?	My workload|My stress|My performance		axis3:self
+A3_OTHER	A3_D1	question	What concern felt most important?	Team delivery|Colleague support|User impact		axis3:other
+A3_R_SELF	A3_SELF	reflection	It’s natural to focus inward under pressure. Expanding perspective can reduce strain and increase meaning.			axis3:self
+A3_R_OTHER	A3_OTHER	reflection	You oriented beyond yourself today. That outward focus often brings clarity and purpose.			axis3:other
+SUMMARY	null	summary	Today you leaned toward {axis1.dominant} agency, {axis2.dominant} orientation, and a {axis3.dominant} radius of concern. Awareness precedes improvement.			
+END	SUMMARY	end	Thanks for reflecting today. See you tomorrow.			
